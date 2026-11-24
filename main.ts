@@ -1,3 +1,9 @@
+// Tiny stack VM: 32-bit two's-complement values, 256-deep data stack,
+// 64-deep call stack, 256-cell memory. Exit codes follow ISA.md:
+// 0 ok, 2 stack underflow, 3 overflow, 4 div-by-zero, 5 bad opcode,
+// 6 bad address, 7 call overflow, 8 call underflow, 9 bad pc,
+// 10 step limit (1e6), 11 output overflow. DIVU/MODU read operands
+// unsigned (so no -1 shortcut: b=-1 means divisor 4294967295).
 import{mkdirSync,readdirSync,readFileSync,writeFileSync}from"node:fs";
 import{join}from"node:path";
 function R(p,q){let D=new Int32Array(256),s=0,C=new Int32Array(64),c=0,M=new Int32Array(256),o=new Uint8Array(65536),l=0,i=0,pc=0,t=0;
